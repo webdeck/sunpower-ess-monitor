@@ -26,7 +26,7 @@ Monitors a SunPower ESS system, publishing metrics to a MQTT broker
 
 ## Install prerequisites and this package
 ```
-bash <(curl -s https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/master/install.sh)
+sudo bash <(curl -s https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/master/install.sh)
 ```
 
 TO BE CONTINUED...
