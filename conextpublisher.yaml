@@ -1,0 +1,829 @@
+---
+publisher:
+  interval: 15
+  pidFile: "/var/run/conextpublisher.pid"
+
+modbusTCP:
+  port: 503
+  unit: 1
+  debug: false
+
+mqtt:
+  host: "TEMPLATE_MQTT_HOST"
+  port: TEMPLATE_MQTT_PORT
+  username: "TEMPLATE_MQTT_USERNAME"
+  password: "TEMPLATE_MQTT_PASSWORD"
+  clientID: "conextpublisher"
+  connectTimeout: 30
+  topicPrefix: "TEMPLATE_MQTT_TOPIC_PREFIX/"
+
+registers:
+  - topic: deviceName
+    address: 0x0000
+    type: str
+    len: 16
+  - topic: fgaNumber
+    address: 0x000A
+    type: str
+    len: 16
+  - topic: firmwareVersion
+    address: 0x001E
+    type: str
+    len: 20
+  - topic: modbusAddress
+    address: 0x0028
+    type: uint
+    len: 16
+  - topic: hardwareSerialNumber
+    address: 0x002B
+    type: str
+    len: 16
+#  - topic: utcTime
+#    address: 0x003A
+#    type: uint
+#    len: 32
+#  - topic: timeZone
+#    address: 0x003C
+#    type: uint
+#    len: 16
+  - topic: maintenanceStatus
+    address: 0x003D
+    type: uint
+    len: 16
+#  - topic: systemStatus
+#    address: 0x0040
+#    type: bitfield
+#    len: 16
+#    bits:
+#      - topic: gridToLoad
+#        bit: 0
+#      - topic: generatorToLoad
+#        bit: 1
+#      - topic: batteryToGrid
+#        bit: 3
+#      - topic: gridToBattery
+#        bit: 4
+#      - topic: generatorToBattery
+#        bit: 5
+#      - topic: solarToBattery
+#        bit: 6
+#      - topic: solarToGrid
+#        bit: 7
+#      - topic: batteryToLoad
+#        bit: 8
+  - topic: systemWideNumberOfActiveFaults
+    address: 0x0041
+    type: uint
+    len: 16
+#  - topic: generatorState
+#    address: 0x0042
+#    type: uint
+#    len: 16
+  - topic: systemWideNumberOfActiveWarnings
+    address: 0x0043
+    type: uint
+    len: 16
+#  - topic: pvHarvestPower
+#    address: 0x0044
+#    type: uint
+#    len: 32
+  - topic: dcChargingPower
+    address: 0x0046
+    type: uint
+    len: 32
+  - topic: dcChargingCurrent
+    address: 0x0048
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: dcInvertingPower
+    address: 0x004A
+    type: uint
+    len: 32
+  - topic: gridVoltage
+    address: 0x004C
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: gridFrequency
+    address: 0x004E
+    type: uint
+    len: 32
+    scale: 0.01
+  - topic: gridInputPowerApp
+    address: 0x0050
+    type: uint
+    len: 32
+  - topic: gridInputPower
+    address: 0x0052
+    type: uint
+    len: 32
+  - topic: gridInputCurrent
+    address: 0x0054
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: gridOutputPowerApp
+    address: 0x0056
+    type: uint
+    len: 32
+  - topic: gridOutputPower
+    address: 0x0058
+    type: uint
+    len: 32
+#  - topic: sellCurrent
+#    address: 0x005A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: acGeneratorPower
+#    address: 0x005C
+#    type: uint
+#    len: 32
+  - topic: loadPowerInOut
+    address: 0x005E
+    type: sint
+    len: 32
+  - topic: loadOutputPower
+    address: 0x0060
+    type: uint
+    len: 32
+  - topic: loadInPower
+    address: 0x0062
+    type: uint
+    len: 32
+  - topic: loadPowerApp
+    address: 0x0064
+    type: sint
+    len: 32
+  - topic: loadPower
+    address: 0x0066
+    type: sint
+    len: 32
+  - topic: loadVoltage
+    address: 0x0068
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: loadFrequency
+    address: 0x006A
+    type: uint
+    len: 32
+    scale: 0.01
+  - topic: loadCurrent
+    address: 0x006C
+    type: sint
+    len: 32
+    scale: 0.001
+  - topic: xwGridPower
+    address: 0x006E
+    type: sint
+    len: 32
+  - topic: xwGridVoltage
+    address: 0x0070
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: xwGridFrequency
+    address: 0x0072
+    type: uint
+    len: 32
+    scale: 0.01
+#  - topic: xwGeneratorPower
+#    address: 0x0074
+#    type: uint
+#    len: 32
+#  - topic: xwGeneratorVoltage
+#    address: 0x0076
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: xwGeneratorFrequency
+#    address: 0x0078
+#    type: uint
+#    len: 32
+#    scale: 0.01
+  - topic: xwLoadPower
+    address: 0x007A
+    type: uint
+    len: 32
+  - topic: xwLoadVoltage
+    address: 0x007C
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: xwLoadFrequency
+    address: 0x007E
+    type: uint
+    len: 32
+    scale: 0.01
+  - topic: xwBatteryCurrent
+    address: 0x0080
+    type: sint
+    len: 32
+    scale: 0.001
+#  - topic: cswAC1Power
+#    address: 0x0082
+#    type: uint
+#    len: 32
+#  - topic: cswAC1Voltage
+#    address: 0x0084
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: cswAC1Frequency
+#    address: 0x0086
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#  - topic: cswACOutPower
+#    address: 0x0088
+#    type: sint
+#    len: 32
+#  - topic: cswACOutVoltage
+#    address: 0x008A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: cswACOutFrequency
+#    address: 0x008C
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#  - topic: cswDCCurrentNet
+#    address: 0x008E
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: mpptPVPower
+#    address: 0x0090
+#    type: uint
+#    len: 32
+#  - topic: mpptBatteryCurrent
+#    address: 0x0092
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: mpptBatteryPower
+#    address: 0x0094
+#    type: uint
+#    len: 32
+#  - topic: gtPVPower
+#    address: 0x0096
+#    type: uint
+#    len: 32
+#  - topic: gtGridPower
+#    address: 0x0098
+#    type: uint
+#    len: 32
+#  - topic: gtGridVoltage
+#    address: 0x009A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+  - topic: batteryVoltage
+    address: 0x009C
+    type: uint
+    len: 32
+    scale: 0.001
+#  - topic: batteryTemperature
+#    address: 0x009E
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#    offset: -273.0
+#  - topic: generatorCurrentLine1
+#    address: 0x0148
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorCurrentLine2
+#    address: 0x014A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadCurrentLine1
+#    address: 0x014C
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadCurrentLine2
+#    address: 0x014E
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridInputCurrentLine1
+#    address: 0x0150
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridInputCurrentLine2
+#    address: 0x0152
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridOutputCurrentLine1
+#    address: 0x0154
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridOutputCurrentLine2
+#    address: 0x0156
+#    type: uint
+#    len: 32
+#    scale: 0.001
+  - topic: batteryPowerNet
+    address: 0x0158
+    type: sint
+    len: 32
+#  - topic: lastFullCharge
+#    address: 0x015A
+#    type: uint
+#    len: 32
+#  - topic: generatorVoltage
+#    address: 0x015C
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorFrequency
+#    address: 0x015E
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#  - topic: totalGeneratorCurrent
+#    address: 0x0160
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: pvVoltage
+#    address: 0x0162
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: totalPVCurrent
+#    address: 0x0164
+#    type: uint
+#    len: 32
+#    scale: 0.001
+  - topic: gridOutputCurrent
+    address: 0x0166
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: gridTieToLoadPower
+    address: 0x0168
+    type: uint
+    len: 32
+  - topic: batteryBank1Voltage
+    address: 0x0200
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: batteryBank1Current
+    address: 0x0202
+    type: sint
+    len: 32
+    scale: 0.001
+  - topic: batteryBank1Temperature
+    address: 0x0204
+    type: uint
+    len: 32
+    scale: 0.01
+    offset: -273.0
+  - topic: batteryBank1ChargingCurrent
+    address: 0x0206
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: batteryBank1ChargingPower
+    address: 0x0208
+    type: uint
+    len: 32
+  - topic: batteryBank1InvertingCurrent
+    address: 0x020A
+    type: uint
+    len: 32
+    scale: 0.001
+  - topic: batteryBank1InvertingPower
+    address: 0x020C
+    type: uint
+    len: 32
+#  - topic: batteryBank2Voltage
+#    address: 0x020E
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank2Current
+#    address: 0x0210
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank2Temperature
+#    address: 0x0212
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#    offset: -273.0
+#  - topic: batteryBank2ChargingCurrent
+#    address: 0x0214
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank2ChargingPower
+#    address: 0x0216
+#    type: uint
+#    len: 32
+#  - topic: batteryBank2InvertingCurrent
+#    address: 0x0218
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank2InvertingPower
+#    address: 0x021A
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3Voltage
+#    address: 0x021C
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank3Current
+#    address: 0x021E
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank3Temperature
+#    address: 0x0220
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#    offset: -273.0
+#  - topic: batteryBank3ChargingCurrent
+#    address: 0x0222
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank3ChargingPower
+#    address: 0x0224
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3InvertingCurrent
+#    address: 0x0226
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank3InvertingPower
+#    address: 0x0228
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4Voltage
+#    address: 0x022A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank4Current
+#    address: 0x022C
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank4Temperature
+#    address: 0x022E
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#    offset: -273.0
+#  - topic: batteryBank4ChargingCurrent
+#    address: 0x0230
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank4ChargingPower
+#    address: 0x0232
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4InvertingCurrent
+#    address: 0x0234
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank4InvertingPower
+#    address: 0x0236
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5Voltage
+#    address: 0x0238
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank5Current
+#    address: 0x023A
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank5Temperature
+#    address: 0x023C
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#    offset: -273.0
+#  - topic: batteryBank5ChargingCurrent
+#    address: 0x023E
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank5ChargingPower
+#    address: 0x0240
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5InvertingCurrent
+#    address: 0x0242
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: batteryBank5InvertingPower
+#    address: 0x0244
+#    type: uint
+#    len: 32
+  - topic: comBoxMode
+    address: 0x0380
+    type: uint
+    len: 32
+  - topic: externalContactorStatus
+    address: 0x0382
+    type: uint
+    len: 32
+#  - topic: wetherStationIrradiance
+#    address: 0x0384
+#    type: sint
+#    len: 32
+#  - topic: weatherStationTemperature
+#    address: 0x0386
+#    type: sint
+#    len: 32
+#    scale: 0.1
+#  - topic: weatherStationOperatingMode
+#    address: 0x0388
+#    type: uint
+#    len: 32
+#  - topic: solarInverterLoadSideCurtailmentStatus
+#    address: 0x038A
+#    type: uint
+#    len: 32
+#  - topic: solarInverterLoadSideOutputPower
+#    address: 0x038C
+#    type: uint
+#    len: 32
+#  - topic: solarInverterLoadSideFrequency
+#    address: 0x038E
+#    type: uint
+#    len: 32
+#    scale: 0.01
+#  - topic: gridVoltageLine1
+#    address: 0x03A8
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridCurrentLine1
+#    address: 0x03AA
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridVoltageLine2
+#    address: 0x03AC
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridCurrentLine2
+#    address: 0x03AE
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridVoltageLine3
+#    address: 0x03B0
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: gridCurrentLine3
+#    address: 0x03B2
+#    type: sint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorRunningSince
+#    address: 0x03B4
+#    type: uint
+#    len: 32
+#  - topic: generatorVoltageLine1
+#    address: 0x03B6
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorVoltageLine2
+#    address: 0x03B8
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorVoltageLine3
+#    address: 0x03BA
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: generatorCurrentLine3
+#    address: 0x03BC
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadVoltageLine1
+#    address: 0x03BE
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadVoltageLine2
+#    address: 0x03C0
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadVoltageLine3
+#    address: 0x03C2
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: loadCurrentLine3
+#    address: 0x03C4
+#    type: uint
+#    len: 32
+#    scale: 0.001
+  - topic: batteryBank1Power
+    address: 0x03C6
+    type: sint
+    len: 32
+  - topic: batteryBank1SOC
+    address: 0x03C8
+    type: uint
+    len: 32
+  - topic: batteryBank1CapacityRemaining
+    address: 0x03CA
+    type: uint
+    len: 32
+  - topic: batteryBank1TimeUntilRecharge
+    address: 0x03CC
+    type: uint
+    len: 32
+  - topic: batteryBank1LastRechargeTime
+    address: 0x03CE
+    type: uint
+    len: 32
+#  - topic: batteryBank2Power
+#    address: 0x03D0
+#    type: sint
+#    len: 32
+#  - topic: batteryBank2SOC
+#    address: 0x03D2
+#    type: uint
+#    len: 32
+#  - topic: batteryBank2CapacityRemaining
+#    address: 0x03D4
+#    type: uint
+#    len: 32
+#  - topic: batteryBank2TimeUntilRecharge
+#    address: 0x03D6
+#    type: uint
+#    len: 32
+#  - topic: batteryBank2LastRechargeTime
+#    address: 0x03D8
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3Power
+#    address: 0x03DA
+#    type: sint
+#    len: 32
+#  - topic: batteryBank3SOC
+#    address: 0x03DC
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3CapacityRemaining
+#    address: 0x03DE
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3TimeUntilRecharge
+#    address: 0x03E0
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3LastRechargeTime
+#    address: 0x03E2
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4Power
+#    address: 0x03E4
+#    type: sint
+#    len: 32
+#  - topic: batteryBank4SOC
+#    address: 0x03E6
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4CapacityRemaining
+#    address: 0x03E8
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4TimeUntilRecharge
+#    address: 0x03EA
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4LastRechargeTime
+#    address: 0x03EC
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5Power
+#    address: 0x03EE
+#    type: sint
+#    len: 32
+#  - topic: batteryBank5SOC
+#    address: 0x03F0
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5CapacityRemaining
+#    address: 0x03F2
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5TimeUntilRecharge
+#    address: 0x03F4
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5LastRechargeTime
+#    address: 0x03F6
+#    type: uint
+#    len: 32
+  - topic: gridNetPower
+    address: 0x03F8
+    type: sint
+    len: 32
+#  - topic: pvTotalPower
+#    address: 0x03FA
+#    type: uint
+#    len: 32
+  - topic: batteryBankTotalInvertingPower
+    address: 0x03FC
+    type: uint
+    len: 32
+  - topic: batteryBankTotalChargingPower
+    address: 0x03FE
+    type: uint
+    len: 32
+#  - topic: invLoadVoltageLine1
+#    address: 0x0402
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: invLoadCurrentLine1
+#    address: 0x0404
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: invLoadVoltageLine2
+#    address: 0x0406
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: invLoadCurrentLine2
+#    address: 0x0408
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: invLoadVoltageLine3
+#    address: 0x040A
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: invLoadCurrentLine3
+#    address: 0x040C
+#    type: uint
+#    len: 32
+#    scale: 0.001
+#  - topic: pvTotalPowerMax
+#    address: 0x040E
+#    type: uint
+#    len: 32
+#  - topic: loadPowerMax
+#    address: 0x0410
+#    type: uint
+#    len: 32
+  - topic: batteryBank1SOH
+    address: 0x041E
+    type: uint
+    len: 32
+#  - topic: batteryBank2SOH
+#    address: 0x0420
+#    type: uint
+#    len: 32
+#  - topic: batteryBank3SOH
+#    address: 0x0422
+#    type: uint
+#    len: 32
+#  - topic: batteryBank4SOH
+#    address: 0x0424
+#    type: uint
+#    len: 32
+#  - topic: batteryBank5SOH
+#    address: 0x0426
+#    type: uint
+#    len: 32
+...
