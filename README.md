@@ -30,7 +30,7 @@ Monitors a SunPower ESS system, publishing metrics to a MQTT broker
 - Connect OTG Micro USB Ethernet Adapter to the micro USB port labeled `USB` on the Raspberry Pi Zero W
 - Connect the short USB to Micro USB power cable to the  micro USB port labeled `PWR` on the Raspberry Pi Zero W
 - Connect the other end of the USB to Micro USB power cable to a power source (e.g. a PC USB port or a USB power adapter)
-- Make sure the Raspberry Pi connects to WiFi and ssh into it: `ssh sunpower-ess-monitor.local`
+- Make sure the Raspberry Pi connects to WiFi and ssh into it: `ssh pi@sunpower-ess-monitor.local`
 
 ## Install software prerequisites and this package
 - On the Raspberry Pi, run this script, which will install all dependencies and configure everything:
