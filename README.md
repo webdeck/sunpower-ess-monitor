@@ -18,10 +18,13 @@ Monitors a SunPower ESS system, publishing metrics to a MQTT broker
 
 ## Install and configure Raspberry Pi OS
 - Install a fresh Raspberry Pi image onto the micro SD card using [Raspberry Pi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html)
-  - Installing a headless image is fine, since we will only be connecting via SSH
-  - Make sure to enable SSH
-  - Make sure to set the hostname to `sunpower-ess-monitor`
-  - Make sure to set your WiFi credentials
+  - Installing a headless image (Raspberry Pi OS Lite) is fine, since we will only be connecting via SSH
+  - Click the gear icon to adjust these settings:
+    - Set the hostname to `sunpower-ess-monitor`
+    - Enable SSH access
+    - Set username to `pi` and specify a password
+    - Configure wireless LAN with your WiFi router SSID, password, and country
+    - Set locale settings to your time zone and keyboard layout
 - After you burn the OS image onto the SD card, eject it and install the SD card into the Raspberry Pi Zero W
 - Install the Raspberry Pi Zero W into a case so that no electronics or pins are exposed
 - Connect OTG Micro USB Ethernet Adapter to the micro USB port labeled `USB` on the Raspberry Pi Zero W
