@@ -17,6 +17,7 @@ apt-get -y remove bluez
 apt-get -y autoremove
 apt-get -y purge bluez
 apt-get -y install nmap
+apt-get -y install python3-pip
 
 pip3 install netifaces
 pip3 install python-nmap
