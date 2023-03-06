@@ -55,7 +55,7 @@ sudo bash <(curl -s https://raw.githubusercontent.com/webdeck/sunpower-ess-monit
 ### Connect USB power cables
 - Connect one of the USB power cables that came with the Ethernet switch to the top USB port in the Hub+, and plug the other end into the Ethernet switch's USB power port
 - Connect the Short USB to Micro USB power cable to the micro USB port labeled `PWR` on the Raspberry Pi Zero W, and plug the other end into the second USB port from the top in the Hub+
-### Illustrated example installation
+### Annotated example installation
 ![Installation example](installation.jpg)
 ### Close the Hub+ cabinet and restore power
 - Replace the Hub+ cover and attach with the two torx screws you previously removed
