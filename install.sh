@@ -6,8 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
-GITHUB="https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/master"
-
+GITHUB="https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/main"
 
 echo ""
 echo "Installing dependencies..."
