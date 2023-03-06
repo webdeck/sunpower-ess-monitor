@@ -35,7 +35,8 @@ Monitors a SunPower ESS system, publishing metrics to a MQTT broker
 ## Install software prerequisites and this package
 - On the Raspberry Pi, run this script, which will install all dependencies and configure everything:
 ```
-sudo bash <(curl -s https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/master/install.sh)
+curl -s https://raw.githubusercontent.com/webdeck/sunpower-ess-monitor/master/install.sh > install.sh
+sudo bash install.sh
 ```
 - Shutdown the Raspberry Pi with the command `sudo shutdown -h now`
 
