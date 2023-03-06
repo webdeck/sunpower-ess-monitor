@@ -89,12 +89,12 @@ echo ""
 
 APP="/usr/local/bin/conextpublisher.py"
 mkdir -p /usr/local/bin
-curl -s "$GITHUB/conextpublusher.py" > $APP
+curl -s "$GITHUB/conextpublisher.py" > $APP
 chmod 755 $APP
 
 CONFIG="/usr/local/etc/conextpublisher.yaml"
 mkdir -p /usr/local/etc
-curl -s "$GITHUB/conextpublusher.yaml" > $CONFIG
+curl -s "$GITHUB/conextpublisher.yaml" > $CONFIG
 chmod 644 $CONFIG
 
 
