@@ -47,44 +47,6 @@ EOF
 
 
 echo ""
-echo "Configuring lower power consumption..."
-echo ""
-cat <<EOF >>/boot/config.txt
-# Throttle everything
-arm_freq=600
-arm_freq_max=600
-arm_freq_min=150
-
-gpu_freq=250
-core_freq_min=250
-
-sdram_freq_min=250
-
-over_voltage=-3
-over_voltage_min=-8
-
-disable_auto_turbo=1
-
-# Disable Bluetooth
-dtoverlay=pi3-disable-bt
-
-# Disable HDMI
-hdmi_blanking=2
-
-# Disable onboard LEDs
-dtparam=act_led_trigger=none
-dtparam=act_led_activelow=off
-dtparam=pwr_led_trigger=none
-dtparam=pwr_led_activelow=off
-
-# Disable audio
-dtparam=audio=off
-EOF
-
-sed -i "s/dtparam=audio=on/# dtparam=audio=on/" /boot/config.txt
-
-
-echo ""
 echo "Installing Conext Publisher..."
 echo ""
 
