@@ -55,7 +55,7 @@ def readUnsignedInt16(client: ModbusClient, reg: int) -> int:
     return client.read_holding_registers(reg, 1)[0]
 
 def readSignedInt16(client: ModbusClient, reg: int) -> int:
-    return utils.get_2comp(readUnsignedInt(client, reg), 16)
+    return utils.get_2comp(readUnsignedInt16(client, reg), 16)
 
 def readUnsignedInt32(client: ModbusClient, reg: int) -> int:
     regs = client.read_holding_registers(reg, 2)
