@@ -100,9 +100,11 @@ cat <<EOF >/lib/systemd/system/conextpublisher.service
 [Unit]
 Description=ConextPublisher
 After=multi-user.target
+StartLimitIntervalSec=0
 
 [Service]
 Restart=always
+RestartSec=3
 Type=idle
 ExecStart=/usr/bin/python3 -u $APP $CONFIG
 
