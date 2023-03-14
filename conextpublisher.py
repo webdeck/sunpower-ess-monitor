@@ -39,7 +39,7 @@ def findConextHost(modbusPort: int):
 
 def readString(client: ModbusClient, reg: int, len: int) -> str:
     regs = client.read_holding_registers(reg, round(len / 2))
-    s = "";
+    s = ""
     for r in regs:
         highByte = r >> 8
         if highByte == 0:
